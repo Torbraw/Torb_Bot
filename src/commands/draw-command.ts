@@ -39,6 +39,12 @@ export class DrawCommand extends BotApplicationCommand {
     }
 
     const users = await reaction.users.fetch();
+
+    if (users.size === 0) {
+      await interaction.reply({ content: 'No users reacted with that emoji', ephemeral: true });
+      return;
+    }
+
     const winner = users.random(1).at(0);
 
     console.log("Users.size: " + users.size)
