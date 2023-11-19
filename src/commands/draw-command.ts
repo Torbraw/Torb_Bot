@@ -39,10 +39,11 @@ export class DrawCommand extends BotApplicationCommand {
     }
 
     const users = await reaction.users.fetch();
-    console.log(users.size)
     const winner = users.random(1).at(0);
+
+    console.log("Users.size: " + users.size)
     console.log(winner)
 
-    await interaction.reply({ content: `The winner is ${winner?.username}` });
+    await interaction.reply({ content: `The winner is ${winner?.toString()}` });
   }
 }
