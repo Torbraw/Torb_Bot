@@ -27,9 +27,6 @@ export class DrawCommand extends BotApplicationCommand {
     const messageId = interaction.options.getString('message_id', true);
     const emoji = interaction.options.getString('emoji', true);
 
-    console.log(messageId);
-    console.log(emoji);
-
     const message = await interaction.channel?.messages.fetch(messageId);
     if (!message) {
       await interaction.reply({ content: 'Message not found', ephemeral: true });
@@ -43,17 +40,12 @@ export class DrawCommand extends BotApplicationCommand {
     }
 
     const users = await reaction.users.fetch();
-
     if (users.size === 0) {
       await interaction.reply({ content: 'No users reacted with that emoji', ephemeral: true });
       return;
     }
 
     const winner = users.random(1).at(0);
-
-    console.log('Users.size: ' + users.size);
-    console.log(winner);
-
     await interaction.reply({ content: `The winner is ${winner?.toString()}` });
   }
 }
