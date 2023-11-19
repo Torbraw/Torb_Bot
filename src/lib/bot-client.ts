@@ -1,6 +1,6 @@
 import { UtilsService } from './utils-service';
-import { Client, ClientOptions } from "discord.js";
-import { BotApplicationCommand } from "./bot-application-command";
+import { Client, ClientOptions } from 'discord.js';
+import { BotApplicationCommand } from './bot-application-command';
 
 export class BotClient extends Client {
   private readonly _commands = new Map<string, BotApplicationCommand>();

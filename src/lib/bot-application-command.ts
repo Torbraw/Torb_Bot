@@ -33,10 +33,14 @@ export abstract class BotApplicationCommand {
     this._permissions = value;
   }
 
-  public constructor(settings: { data: RESTPostAPIApplicationCommandsJSONBody; commandName: string; permissions?: bigint[] }) {
+  public constructor(settings: {
+    data: RESTPostAPIApplicationCommandsJSONBody;
+    commandName: string;
+    permissions?: bigint[];
+  }) {
     this._data = settings.data;
     this._commandName = settings.commandName;
-    this._permissions = settings.permissions || [];
+    this._permissions = settings.permissions ?? [];
   }
 
   public async execute(client: BotClient, interaction: ChatInputCommandInteraction): Promise<void> {

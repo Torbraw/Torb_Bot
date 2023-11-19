@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 import { BotClient } from './src/lib/bot-client';
-import { Events, GatewayIntentBits } from "discord.js";
+import { Events, GatewayIntentBits } from 'discord.js';
 
 dotenv.config();
 
@@ -9,7 +9,7 @@ dotenv.config();
  */
 void (async (): Promise<void> => {
   const client = new BotClient({
-    intents: [GatewayIntentBits.Guilds]
+    intents: [GatewayIntentBits.Guilds],
   });
 
   client.once(Events.ClientReady, () => {
@@ -30,5 +30,5 @@ void (async (): Promise<void> => {
     }
   });
 
-  client.login(process.env.TOKEN);
+  await client.login(process.env.TOKEN);
 })();
