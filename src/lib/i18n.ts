@@ -2,6 +2,7 @@ import { LangKeys } from './config';
 
 export const i18n = {
   fr: {
+    unauthorized: 'Non autorisé',
     unexpectedError: "Une erreur inattendue est survenue lors de l'exécution de cette commande",
     noUsersReacted: "Aucun utilisateur n'a réagi avec cet emoji",
     winnerIs: 'Le gagnant est',
@@ -10,6 +11,7 @@ export const i18n = {
     notRespondInTime: "Vous n'avez pas répondu à temps, la commande a été annulée",
   },
   en: {
+    unauthorized: 'Unauthorized',
     unexpectedError: 'An unexpected error occured while executing this command',
     noUsersReacted: 'No users reacted with that emoji',
     winnerIs: 'The winner is',

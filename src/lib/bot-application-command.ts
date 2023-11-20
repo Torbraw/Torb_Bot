@@ -52,11 +52,11 @@ export abstract class BotApplicationCommand {
   public async execute(
     _client: BotClient,
     interaction: ChatInputCommandInteraction | MessageContextMenuCommandInteraction,
-    _t: TransFunction,
+    t: TransFunction,
   ): Promise<void> {
     // Verify if the user can execute the command
     if (!this.hasPermission(interaction.memberPermissions)) {
-      await interaction.reply({ content: 'Unauthorized', ephemeral: true });
+      await interaction.reply({ content: t('unauthorized'), ephemeral: true });
       return;
     }
   }

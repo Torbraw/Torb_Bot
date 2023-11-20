@@ -32,6 +32,8 @@ export class DrawCommand extends BotApplicationCommand {
 
   public async execute(client: BotClient, interaction: MessageContextMenuCommandInteraction, t: TransFunction) {
     await super.execute(client, interaction, t);
+    if (interaction.replied) return;
+
     const message = interaction.targetMessage;
 
     const emojiInput = new TextInputBuilder()
