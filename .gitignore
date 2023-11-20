@@ -18,7 +18,4 @@
 # misc
 .env
 .env.prod
-/terraform/.terraform.lock.hcl
-/terraform/.terraform
-/terraform/*.zip
-.turbo
+.env.dev
