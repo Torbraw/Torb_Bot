@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import { BotClient } from './src/lib/bot-client';
 import { Events, GatewayIntentBits } from 'discord.js';
+import { BotClient } from './src/lib/bot-client';
 
 dotenv.config();
 
@@ -17,16 +17,24 @@ void (async (): Promise<void> => {
   });
 
   client.on(Events.InteractionCreate, async (interaction) => {
-    if (!interaction.isChatInputCommand()) return;
+    if (!interaction.isChatInputCommand() && !interaction.isMessageContextMenuCommand()) return;
+
+    const lang = client.utilsService.getLangFromLocale(interaction.locale);
+    const t = client.utilsService.useTranslations(lang);
 
     const command = client.commands.get(interaction.commandName);
     if (!command) return;
 
     try {
-      await command.execute(client, interaction);
+      await command.execute(client, interaction, t);
     } catch (error: unknown) {
       console.error(error);
-      await interaction.reply({ content: 'There was an error while executing this command', ephemeral: true });
+
+      if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({ content: t('unexpectedError'), ephemeral: true });
+      } else {
+        await interaction.followUp({ content: t('unexpectedError'), ephemeral: true });
+      }
     }
   });
 

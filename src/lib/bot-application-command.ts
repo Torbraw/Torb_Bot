@@ -1,19 +1,25 @@
 import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/rest/v10';
-import { ChatInputCommandInteraction, PermissionsBitField } from 'discord.js';
+import {
+  ChatInputCommandInteraction,
+  MessageContextMenuCommandInteraction,
+  PermissionsBitField,
+  RESTPostAPIContextMenuApplicationCommandsJSONBody,
+} from 'discord.js';
 import { BotClient } from './bot-client';
+import { TransFunction } from './types';
 
 export abstract class BotApplicationCommand {
-  private _data: RESTPostAPIApplicationCommandsJSONBody;
+  private _data: RESTPostAPIApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody;
 
   private _commandName: string;
 
   private _permissions: bigint[];
 
-  public get data(): RESTPostAPIApplicationCommandsJSONBody {
+  public get data(): RESTPostAPIApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody {
     return this._data;
   }
 
-  public set data(value: RESTPostAPIApplicationCommandsJSONBody) {
+  public set data(value: RESTPostAPIApplicationCommandsJSONBody | RESTPostAPIContextMenuApplicationCommandsJSONBody) {
     this._data = value;
   }
 
@@ -43,7 +49,11 @@ export abstract class BotApplicationCommand {
     this._permissions = settings.permissions ?? [];
   }
 
-  public async execute(client: BotClient, interaction: ChatInputCommandInteraction): Promise<void> {
+  public async execute(
+    _client: BotClient,
+    interaction: ChatInputCommandInteraction | MessageContextMenuCommandInteraction,
+    _t: TransFunction,
+  ): Promise<void> {
     // Verify if the user can execute the command
     if (!this.hasPermission(interaction.memberPermissions)) {
       await interaction.reply({ content: 'Unauthorized', ephemeral: true });

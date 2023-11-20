@@ -4,10 +4,6 @@ import { REST, Routes } from 'discord.js';
 
 dotenv.config();
 
-/**
- * Deploy the application commands to either the private dbot guild
- * or globally if the environments variable IS_GLOBAL=TRUE
- */
 void (async (): Promise<void> => {
   const clientId = process.env.CLIENT_ID ?? '';
   const rest = new REST({ version: '10' }).setToken(process.env.TOKEN ?? '');
