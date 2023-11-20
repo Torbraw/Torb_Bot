@@ -2,7 +2,8 @@ import {
   ActionRowBuilder,
   ApplicationCommandType,
   ContextMenuCommandBuilder,
-  InteractionCollector,
+  DiscordjsError,
+  DiscordjsErrorCodes,
   MessageContextMenuCommandInteraction,
   ModalActionRowComponentBuilder,
   ModalBuilder,
@@ -66,9 +67,8 @@ export class DrawCommand extends BotApplicationCommand {
       const winner = users.random(1).at(0);
       await modalSubmit.reply({ content: `${t('winnerIs')} ${winner?.toString()}` });
     } catch (error) {
-      console.error(error);
-      if (error instanceof InteractionCollector && error.endReason === 'time') {
-        await interaction.followUp({ content: t('notRespondInTime'), ephemeral: true });
+      if (error instanceof DiscordjsError && error.code === DiscordjsErrorCodes.InteractionCollectorError) {
+        await interaction.followUp({ content: t('commandCancelled'), ephemeral: true });
         return;
       }
 

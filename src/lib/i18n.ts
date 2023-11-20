@@ -8,7 +8,7 @@ export const i18n = {
     winnerIs: 'Le gagnant est',
     drawWinner: 'Tirer un gagnant',
     emojiInput: "Entrez l'emoji pour tirer un gagnant",
-    notRespondInTime: "Vous n'avez pas répondu à temps, la commande a été annulée",
+    commandCancelled: 'The command has been cancelled',
   },
   en: {
     unauthorized: 'Unauthorized',
@@ -17,6 +17,6 @@ export const i18n = {
     winnerIs: 'The winner is',
     drawWinner: 'Draw a winner',
     emojiInput: 'Enter the emoji to draw a winner',
-    notRespondInTime: 'You did not respond in time, the command has been cancelled',
+    commandCancelled: 'The command has been cancelled',
   },
 } as const satisfies Record<LangKeys, Record<string, string>>;
